@@ -34,6 +34,14 @@
 									<img src="./build/img/social/dribble.png" height="18" width="18"
 										class="hidden-small"> <span class="d-md-none">Dribble</span>
 								</a></li>
+
+								<li>
+									<a href="https://www.designhill.com/member/dharmenkumar3" class="behance" target="_blank">
+										<img src="./build/img/social/designhill.png" height="18" width="18" class="hidden-small"> <span
+											class="d-md-none">Designhill</span>
+									</a>
+								</li>
+								
 							<li><a href="https://www.upwork.com/freelancers/~011b1b21313af436cc" class="upwork"
 									target="_blank">
 									<img src="./build/img/social/upwork.png" height="18" width="18"
@@ -591,6 +599,39 @@
 	<script>(function (h) { h.className = h.className.replace('no-js', 'js') })(document.documentElement)</script>
 	<script src="build/js/jquery.js" type="text/javascript"></script>
 	<script src="build/js/main.js" type="text/javascript"></script>
+	<script>
+		$.ajax({
+			type: 'get',
+			url: 'http://idevia.in/api/projects',
+			headers: {
+				'Content-Type': 'application/json',
+				Accept: 'application/json'
+			},
+			success: function(response){
+				// console.log(response);
+				var html = '';
+				response.data.forEach(function(project) {
+					html += `
+					<div class="img-box scale-anm">
+						<img src="https://idevia.in/storage/${project.image}" alt="" />
+						<div class="transparent-box">
+							<div class="caption">
+								<p>${project.name}</p>
+								<p class="opacity-low">${project.category_name}</p>
+							</div>
+						</div>
+					</div>
+					`
+				});
+
+				$('#portfolio').html(html);
+			},
+
+			error: function(err){
+				console.log(err)
+			},
+		})
+	</script>
 </body>
 
 </html>
